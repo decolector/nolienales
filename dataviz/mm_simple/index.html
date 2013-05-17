@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> Ejercicio Visualizacion de Datos</title>
+        <script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+        <script type="text/javascript">
+
+            function printData(data){
+                console.log(data);
+            }
+
+            var first = "";
+            var red = [];
+            var green = [];
+            var blue = [];
+            var orange = [];
+            var yellow = [];
+            var brown = [];
+            var weight = [];
+
+            $(document).ready(function(){
+                    $.ajax({
+                            url: "MM.txt",
+                            dataType: "text",
+                            success: function(data){
+                                //console.log(data);
+                                var lines = data.split("\n");
+                                //console.log(lines[0]);
+
+                                for(var i = 0; i < lines.length; i++){
+                                    var line = lines[i].split('\t');
+                                    first = lines.shift();
+                                    red.push(line[0]);
+                                    green.push(line[1]);
+                                    blue.push(line[2]);
+                                    orange.push([3]);
+                                    yellow.push([4]);
+                                    brown.push([5]);
+                                    weight.push([6]);
+
+                                }
+                                console.log("red " + red);
+                                var context = document.getElementById('dibujo').getContext('2d');
+                                
+                                for(var i = 0; i < red.length; i++){
+                                    context.beginPath();
+                                    x = 50;
+                                    y = i*50;
+                                    //var grados = (Math.PI/180)*360;
+
+                                    context.arc(x, y, red[i], 0, Math.PI*2, true);
+                                    context.fill();
+                                    context.closePath();
+                                    }
+
+                                }
+                        });
+                
+                    });
+        </script>
+    </head>
+    <body>
+        <div id="results"></div>
+        <canvas id="dibujo" width="500" height="500"></canvas>
+    </body>
+
+</html>
+

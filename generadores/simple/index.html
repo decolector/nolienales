@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang:"en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Pagina de Ejemplo </title>
+
+        <script type="text/javascript">
+            console.log("Hola Mundo");
+            var lista = [
+                "Juan",
+                "Andres",
+                "Ana",
+                "Valeria",
+                "Carlos"
+            ];
+function renderText(){
+                var texto = "Hola " + lista[Math.floor(Math.random() *
+                        lista.length)] + ", buenas noches";
+        
+                document.getElementById("texto").innerHTML = texto;
+            }
+
+        </script>
+    </head>
+    <body onload="renderText()">
+        <h1>
+            Hola Mundo!
+        </h1>
+        <div id="texto">
+        </div>
+    </body>
+</html>

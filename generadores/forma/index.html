@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> Prueba con forma</title>
+        <script type="text/javascript">
+            function loadText(){
+                var saludo = "Hola " + document.getElementById("nombre").value;
+                document.getElementById("result").innerHTML = saludo;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="result">
+            su nombre aqui
+        </div>
+        <form id="forma">
+            <input type="text" id="nombre">
+            <button type="button" onclick="loadText()">crear</button>
+        </form>
+    </body>
+</html>

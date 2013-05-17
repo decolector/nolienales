@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> Ejercicio Visualizacion de Datos</title>
+        <script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+        <script type="text/javascript" src="js/taffy.js" ></script>
+        <script type="text/javascript">
+
+            var db = TAFFY([]);
+
+            $(document).ready(function(){
+                    $.ajax({
+                            url: "MM.txt",
+                            dataType: "text",
+                            success: function(data){
+                                //console.log(data);
+                                var lines = data.split("\n");
+                                //console.log(lines[0]);
+                            	first = lines.shift();
+
+                                for(var i = 0; i < lines.length; i++){
+	
+                                    var line = lines[i].split('\t');
+    
+
+                                    db.insert({"pack":i, "color":"red", "number":line[0], "weight": line[6]});
+                                    db.insert({"pack":i, "color":"green","number":line[1], "weight": line[6]});
+                                    db.insert({"pack":i, "color":"blue", "number":line[2], "weight": line[6]});
+                                    db.insert({"pack":i, "color":"orange", "number":line[3], "weight": line[6]});
+                                    db.insert({"pack":i, "color":"yellow", "number":line[4], "weight": line[6]});
+                                    db.insert({"pack":i, "color":"brown", "number":line[4], "weight": line[6]});
+
+                                }
+								//filtra por color e imprime el numero del primer registro
+								//console.log(db({color:"red"}).first().number);
+								
+								//obtenemos el canvas con jquery	
+								var canvas = $('#dibujo').get(0);
+								canvas.height = (db({color:"red"}).count() + 1) * 50;
+								console.log(canvas.height)
+                                var context = canvas.getContext('2d');
+								var x = 50;
+																
+								//filtramos por color y usamos la funcion each para acceder a cada registro
+								
+								db({color:"red"}).each( function(record, recordnumber){
+									console.log("pack: " +  record["pack"] + " number: " + record["number"]);
+									var y = (recordnumber + 1) *50;
+                                  	context.beginPath();
+                                    context.arc(x, y, record["number"], 0, Math.PI*2, true);
+									context.fillStyle = "red";
+                                    context.fill();
+                                    context.closePath(); 
+									});
+								
+								x += 50;	
+								db({color:"green"}).each( function(record, recordnumber){
+									console.log("pack: " +  record["pack"] + " number: " + record["number"]);
+									var y = (recordnumber + 1) *50;
+                                  	context.beginPath();
+                                    context.arc(x, y, record["number"], 0, Math.PI*2, true);
+									context.fillStyle = "green";
+                                    context.fill();
+                                    context.closePath(); 
+									});
+									
+								x += 50;	
+									
+								db({color:"blue"}).each( function(record, recordnumber){
+									console.log("pack: " +  record["pack"] + " number: " + record["number"]);
+									var y = (recordnumber + 1) *50;
+                                  	context.beginPath();
+                                    context.arc(x, y, record["number"], 0, Math.PI*2, true);
+									context.fillStyle = "blue";
+                                    context.fill();
+                                    context.closePath(); 
+									});	
+							
+									x += 50;	
+
+								db({color:"orange"}).each( function(record, recordnumber){
+									console.log("pack: " +  record["pack"] + " number: " + record["number"]);
+									var y = (recordnumber + 1) *50;
+                                  	context.beginPath();
+                                    context.arc(x, y, record["number"], 0, Math.PI*2, true);
+									context.fillStyle = "orange";
+                                    context.fill();
+                                    context.closePath(); 
+									});	
+
+									x += 50;
+
+								db({color:"yellow"}).each( function(record, recordnumber){
+									console.log("pack: " +  record["pack"] + " number: " + record["number"]);
+									var y = (recordnumber + 1) *50;
+                                  	context.beginPath();
+                                    context.arc(x, y, record["number"], 0, Math.PI*2, true);
+									context.fillStyle = "yellow";
+                                    context.fill();
+                                    context.closePath(); 
+									});	
+
+									x += 50;
+									
+								db({color:"brown"}).each( function(record, recordnumber){
+									console.log("pack: " +  record["pack"] + " number: " + record["number"]);
+									var y = (recordnumber + 1) *50;
+                                  	context.beginPath();
+                                    context.arc(x, y, record["number"], 0, Math.PI*2, true);
+									context.fillStyle = "brown";
+                                    context.fill();
+                                    context.closePath(); 
+									});	
+
+                                }
+                        });
+                
+                    });
+        </script>
+    </head>
+    <body>
+        <div id="results"></div>
+        <canvas id="dibujo" width="500" height="500"></canvas>
+    </body>
+
+</html>
+
